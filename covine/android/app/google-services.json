@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "39833700847",
+    "project_id": "covine-8a90a",
+    "storage_bucket": "covine-8a90a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39833700847:android:3f6e50db0d9399b7654e1a",
+        "android_client_info": {
+          "package_name": "com.example.covine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39833700847-fdphgvp04ros4nfend5v4qa5fkm2deh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_kvMDBPQB_6IhaoRSOuEJWDxaBZcY3Bo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39833700847-fdphgvp04ros4nfend5v4qa5fkm2deh1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39833700847:android:9fa6d9cc855a4f50654e1a",
+        "android_client_info": {
+          "package_name": "com.example.tracov"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39833700847-fdphgvp04ros4nfend5v4qa5fkm2deh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_kvMDBPQB_6IhaoRSOuEJWDxaBZcY3Bo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39833700847-fdphgvp04ros4nfend5v4qa5fkm2deh1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
