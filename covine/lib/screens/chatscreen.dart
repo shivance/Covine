@@ -33,8 +33,6 @@ class _ChatScreenState extends State<ChatScreen> {
     
     setState(() {
       chatList.add(['user',_controller.text.toString()]);
-      res_string = _controller.text.toString();
-      _controller.text = "";
     });
     
 
@@ -45,39 +43,20 @@ class _ChatScreenState extends State<ChatScreen> {
       },
       encoding: Encoding.getByName('utf-8'),
       body: {
-        "qna":res_string,
+        "qna":_controller.text.toString(),
       }
     );
 
     print(response.body);
     
     setState(() {
-      
+      _controller.text = "";
       res_string = response.body.toString();  
       chatList.add(['bot',res_string]);
     });
   }
 
   
-  @override
-  void initState() {    
-    super.initState();
-    _controller.addListener(() {
-      final String text = _controller.text.toLowerCase();
-      _controller.value = _controller.value.copyWith(
-        text:text,
-      );
-    });
-
-    res_string = '';
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
 
 
   @override
