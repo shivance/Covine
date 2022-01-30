@@ -1,3 +1,4 @@
+import 'package:covine/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'bottom_sheet_text.dart';
@@ -31,7 +32,7 @@ class ContactCard extends StatelessWidget {
         title: Text(
           email,
           style: TextStyle(
-            color: Colors.deepPurple[700],
+            color: primary,
             fontWeight: FontWeight.bold,
           ),
         ),

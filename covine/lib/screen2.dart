@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covine/constants.dart';
 
 class Screen2 extends StatefulWidget {
   @override
@@ -9,10 +11,17 @@ class Screen2 extends StatefulWidget {
 
 class _Screen2 extends State<Screen2> {
   List<String> logs = [];
+  Firestore _firestore = Firestore.instance;
   final myController = TextEditingController();
-
+  String email;
   var date = new DateTime.now().toString();
   var dateParse, fd;
+
+  void infected(String email) async {
+    _firestore.collection('users').document(email).updateData({
+      'contact status': 'Infected',
+    });
+  }
 
   void _addTodoItem() {
     dateParse = DateTime.parse(date);
@@ -38,11 +47,14 @@ class _Screen2 extends State<Screen2> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: primary,
       body: new Column(
         children: <Widget>[
+          SizedBox(height: 10),
           Text(
             "LOGS",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
           ),
           new Expanded(child: new ListView.builder(
               itemBuilder: (BuildContext context, int index) {
@@ -69,9 +81,14 @@ class _Screen2 extends State<Screen2> {
                     ),
                   ),
                   TextField(
+                    keyboardType: TextInputType.emailAddress,
+                    textAlign: TextAlign.center,
+                    onChanged: (value) {
+                      email = value;
+                    },
                     decoration: InputDecoration(
-                      icon: Icon(Icons.phone),
-                      labelText: 'Phone',
+                      icon: Icon(Icons.mail),
+                      labelText: 'Mail',
                     ),
                   ),
                   TextField(
@@ -85,22 +102,24 @@ class _Screen2 extends State<Screen2> {
               ),
               buttons: [
                 DialogButton(
+                  color: system_teal,
                   onPressed: () {
                     setState(() {
                       _text.text.isEmpty ? _validate = true : _validate = false;
                     });
                     _addTodoItem();
+                    infected(email);
                     Navigator.pop(context);
                   },
                   child: Text(
-                    "Submit",
+                    "SUBMIT",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 )
               ]).show();
         },
         child: Icon(Icons.add_comment),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.teal[300],
       ),
     );
   }
@@ -109,7 +128,7 @@ class _Screen2 extends State<Screen2> {
     return Card(
       margin: EdgeInsets.all(12),
       elevation: 4,
-      color: Color.fromRGBO(64, 75, 96, .9),
+      color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
         child: Row(
@@ -122,12 +141,12 @@ class _Screen2 extends State<Screen2> {
                     style:
                         TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 SizedBox(height: 4),
-                Text("Log $index", style: TextStyle(color: Colors.white70)),
-                Text("$fd", style: TextStyle(color: Colors.white70)),
+                Text("Log $index", style: TextStyle(color: Colors.black)),
+                Text("$fd", style: TextStyle(color: Colors.black)),
               ],
             ),
             Spacer(),
-            CircleAvatar(backgroundColor: Colors.white),
+            CircleAvatar(backgroundColor: Colors.grey),
           ],
         ),
       ),
@@ -141,46 +160,4 @@ class _Screen2 extends State<Screen2> {
       ),
     );
   }
-
-  /* void _showDialog() {
-    // flutter defined function
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)), //this right here
-            child: Container(
-              height: 200,
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextField(
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'What do you want to remember?'),
-                    ),
-                    SizedBox(
-                      width: 320.0,
-                      child: RaisedButton(
-                        onPressed: () {
-                          createLog();
-                        },
-                        child: Text(
-                          "Save",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        color: const Color(0xFF1BC0C5),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          );
-        });
-  }*/
 }

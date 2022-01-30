@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covine/components/rounded_button.dart';
 import 'package:covine/constants.dart';
-import 'package:covine/nearby_interface.dart';
+import 'package:covine/tracing.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -27,7 +27,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/bg1.jpg'),
+            image: AssetImage('images/bg1.jpeg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -88,6 +88,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       if (newUser != null) {
                         _firestore.collection('users').document(email).setData({
                           'username': userName,
+                          'contact status':'Not Infected',
                         });
                         Navigator.pushNamed(context, NearbyInterface.id);
                       }

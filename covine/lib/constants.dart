@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 const kButtonTextStyle = TextStyle(
   fontSize: 20.0,
   fontWeight: FontWeight.bold,
-  color: Colors.white,
+  color: Colors.black,
 );
 
 const kSendButtonTextStyle = TextStyle(
-  color: Colors.lightBlueAccent,
+  color: primary,
   fontWeight: FontWeight.bold,
   fontSize: 8.0,
 );
@@ -42,4 +43,15 @@ const kTextFieldDecoration = InputDecoration(
     borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
+);
+
+const Color primary = Color(0xff053F5E);
+const Color white = Colors.white;
+const Color system_teal = CupertinoColors.systemTeal;
+
+const blueGradient = LinearGradient(
+  colors: <Color>[primary, system_teal, white],
+  stops: [0.0, 0.5, 1.0],
+  begin: Alignment.centerLeft,
+  end: Alignment.centerRight,
 );

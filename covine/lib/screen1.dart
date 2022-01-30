@@ -18,12 +18,19 @@ class _Screen1 extends State<Screen1> {
   Firestore _firestore = Firestore.instance;
   final Strategy strategy = Strategy.P2P_STAR;
   FirebaseUser loggedInUser;
-  String testText = '', emaill = '';
+  String emaill = '';
+  int zone = 0;
   final _auth = FirebaseAuth.instance;
   List<dynamic> contactTraces = [];
   List<dynamic> contactTimes = [];
   List<dynamic> contactLocations = [];
-
+  List<dynamic> contactStatus = [];
+  List<String> threat = ["Safe", "Potential Threat", "Threat"];
+  List<String> warning = [
+    "You are safe",
+    "You came in contact of infected person",
+    "Tested positive"
+  ];
   void addContactsToList() async {
     await getCurrentUser();
     _firestore
@@ -44,6 +51,7 @@ class _Screen1 extends State<Screen1> {
         if (!contactTraces.contains(currUsername)) {
           contactTraces.add(currUsername);
           contactTimes.add(currTime);
+          contactStatus.add('Not Infected');
           contactLocations.add(currLocation);
         }
       }
@@ -98,6 +106,7 @@ class _Screen1 extends State<Screen1> {
           'username': await getUsernameOfEmail(email: name),
           'contact time': DateTime.now(),
           'contact location': (await location.getLocation()).toString(),
+          'contact status': 'Not Infected',
         });
       }, onEndpointLost: (id) {
         print(id);
@@ -138,9 +147,23 @@ class _Screen1 extends State<Screen1> {
     }
   }
 
-  //Future navigateToSubPage(context) async {
-  //Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-  //}
+  void ifInfected() async {
+    getCurrentUser();
+    _firestore
+        .collection('users')
+        .document(loggedInUser.email)
+        .collection('met_with')
+        .snapshots()
+        .listen((snapshot) {
+      for (var doc in snapshot.documents) {
+        var mail = doc.documentID;
+        _firestore.collection('users').document(mail).get().then((doc) {
+          print(doc.data['contact status']);
+          if (doc.data['contact status'] == 'Infected') zone = 1;
+        });
+      }
+    });
+  }
 
   @override
   void initState() {
@@ -153,6 +176,7 @@ class _Screen1 extends State<Screen1> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: primary,
       body: Column(
         children: <Widget>[
           Expanded(
@@ -171,7 +195,7 @@ class _Screen1 extends State<Screen1> {
                   borderRadius: BorderRadius.circular(20.0),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.lightGreen,
+                      color: system_teal,
                       blurRadius: 4.0,
                       spreadRadius: 0.0,
                       offset:
@@ -209,7 +233,39 @@ class _Screen1 extends State<Screen1> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0)),
               elevation: 6.0,
-              color: Colors.blue,
+              color: Colors.teal[300],
+              onPressed: () {
+                ifInfected();
+                return showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    backgroundColor: (zone == 1) ? Colors.yellow : Colors.green,
+                    title: Text(threat[zone]),
+                    content: Text(warning[zone]),
+                    actions: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.of(ctx).pop();
+                        },
+                        child: Text("okay"),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: Text(
+                'Am I infected ?',
+                style: kButtonTextStyle,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 30.0),
+            child: RaisedButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0)),
+              elevation: 6.0,
+              color: Colors.teal[300],
               onPressed: () async {
                 try {
                   bool a = await Nearby().startAdvertising(
@@ -244,9 +300,9 @@ class _Screen1 extends State<Screen1> {
               child: ListView.builder(
                 itemBuilder: (context, index) {
                   return ContactCard(
-                    imagePath: 'images/profile1.jpg',
+                    imagePath: 'images/user.jpg',
                     email: contactTraces[index],
-                    infection: 'Not-Infected',
+                    infection: contactStatus[index],
                     contactUsername: contactTraces[index],
                     contactTime: contactTimes[index],
                     contactLocation: contactLocations[index],

@@ -1,7 +1,7 @@
+import 'package:covine/constants.dart';
 import 'package:covine/login.dart';
-import 'package:covine/nearby_interface.dart';
+import 'package:covine/tracing.dart';
 import 'package:covine/registration.dart';
-import 'package:covine/screen3.dart';
 import 'package:covine/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: WelcomeScreen(),
-      theme: ThemeData(fontFamily: 'Exo'),
+      theme: ThemeData(
+        fontFamily: "Montserrat",
+        primarySwatch: Colors.blue,
+      ),
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         RegistrationScreen.id: (context) => RegistrationScreen(),

@@ -1,17 +1,12 @@
-//import 'package:apple_maps_flutter/apple_maps_flutter.dart';
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:covine/constants.dart';
 import 'package:location/location.dart';
 import 'package:nearby_connections/nearby_connections.dart';
-import 'package:styled_widget/styled_widget.dart';
-//import 'package:covine/nearby_interface.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:covine/login.dart';
 import 'package:google_maps_flutter_heatmap/google_maps_flutter_heatmap.dart';
 
 class Screen3 extends StatefulWidget {
@@ -146,10 +141,6 @@ class _Screen3 extends State<Screen3> {
     }
   }
 
-  //Future navigateToSubPage(context) async {
-  //Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-  //}
-
   Completer<GoogleMapController> _controller = Completer();
   final Set<Heatmap> _heatmaps = {};
   static final CameraPosition _kGooglePlex = CameraPosition(
@@ -174,44 +165,45 @@ class _Screen3 extends State<Screen3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: primary,
         //  resizeToAvoidBottomInset: true,
         body: Container(
             //child: Center(
             child: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            height: 220,
-            padding: EdgeInsets.only(top: 12.0),
-            margin: EdgeInsets.only(top: 10),
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              color: Color(0xff3977ff), //Colors.green[600],
-              elevation: 10,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: CircleAvatar(
-                      radius: 30,
-                      backgroundImage: AssetImage(
-                        "images/user.jpg",
-                      ), // no matter how big it is, it won't overflow
-                    ), //Icon(Icons.supervised_user_circle, size: 70),
-                    title:
-                        Text('$emaill', style: TextStyle(color: Colors.white)),
-                    subtitle: Text('             Overall Stats',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        )),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                height: 220,
+                padding: EdgeInsets.only(top: 12.0),
+                margin: EdgeInsets.only(top: 10),
+                width: MediaQuery.of(context).size.width,
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
-                  /*Align(
+                  color: system_teal, 
+                  elevation: 10,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      ListTile(
+                        leading: CircleAvatar(
+                          radius: 30,
+                          backgroundImage: AssetImage(
+                            "images/user.jpg",
+                          ), // no matter how big it is, it won't overflow
+                        ), //Icon(Icons.supervised_user_circle, size: 70),
+                        title: Text('$emaill',
+                            style: TextStyle(color: Colors.black)),
+                        subtitle: Text('             Overall Stats',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            )),
+                      ),
+                      /*Align(
                     alignment: Alignment.centerLeft,
                     child: Container(
                       padding: EdgeInsets.only(left: 25.0),
@@ -224,76 +216,76 @@ class _Screen3 extends State<Screen3> {
                       ),
                     ),
                   ),*/
-                  IntrinsicHeight(
-                      child: new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          "$contacts",
-                          style: new TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 25),
-                        ),
-                      ),
-                      VerticalDivider(
-                        color: Colors.white,
-                      ),
-                      Container(
-                        child: Text(
-                          "$contacts",
-                          style: new TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 25),
-                        ),
-                      ),
-                    ],
-                  )),
-                  IntrinsicHeight(
-                      child: new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          "",
-                          style: new TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                      ),
-                      VerticalDivider(
-                        color: Colors.white,
-                      ),
-                      Container(
-                        child: Text(
-                          "",
-                          style: new TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                      ),
-                    ],
-                  )),
-                  IntrinsicHeight(
-                      child: new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          "   Daily\nContacts",
-                          style: new TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 13),
-                        ),
-                      ),
-                      VerticalDivider(
-                        color: Colors.white,
-                      ),
-                      Container(
-                        child: Text(
-                          "   Total\nContacts",
-                          style: new TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 13),
-                        ),
-                      ),
-                    ],
-                  )),
-                  /*Container(
+                      IntrinsicHeight(
+                          child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Container(
+                            child: Text(
+                              "$contacts",
+                              style: new TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25),
+                            ),
+                          ),
+                          VerticalDivider(
+                            color: Colors.white,
+                          ),
+                          Container(
+                            child: Text(
+                              "$contacts",
+                              style: new TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25),
+                            ),
+                          ),
+                        ],
+                      )),
+                      IntrinsicHeight(
+                          child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Container(
+                            child: Text(
+                              "",
+                              style: new TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ),
+                          VerticalDivider(
+                            color: Colors.white,
+                          ),
+                          Container(
+                            child: Text(
+                              "",
+                              style: new TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ),
+                        ],
+                      )),
+                      IntrinsicHeight(
+                          child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Container(
+                            child: Text(
+                              "   Daily\nContacts",
+                              style: new TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ),
+                          VerticalDivider(
+                            color: Colors.white,
+                          ),
+                          Container(
+                            child: Text(
+                              "   Total\nContacts",
+                              style: new TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ),
+                        ],
+                      )),
+                      /*Container(
                     padding: EdgeInsets.only(left: 25.0),
                     margin: EdgeInsets.only(top: 28.0, left: 20.0),
                     width: double.infinity,
@@ -305,38 +297,38 @@ class _Screen3 extends State<Screen3> {
                           fontSize: 13),
                     ),
                   ),*/
-                ],
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
-          SizedBox(
-            width: 350,
-            height: 350,
-            child: GoogleMap(
-              mapType: MapType.hybrid,
-              initialCameraPosition: _kGooglePlex,
-              heatmaps: _heatmaps,
-              onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
-              },
-            ),
+              SizedBox(
+                width: 350,
+                height: 350,
+                child: GoogleMap(
+                  mapType: MapType.hybrid,
+                  initialCameraPosition: _kGooglePlex,
+                  heatmaps: _heatmaps,
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller.complete(controller);
+                  },
+                ),
 
-            /*floatingActionButton: FloatingActionButton.extended(
+                /*floatingActionButton: FloatingActionButton.extended(
         onPressed: _addHeatmap,
         label: Text('Add Heatmap'),
         icon: Icon(Icons.add_box),
       ),*/
-          ),
-          /*Align(
+              ),
+              /*Align(
             child: FloatingActionButton.extended(
               onPressed: _addHeatmap,
               label: Text('Add Heatmap'),
               icon: Icon(Icons.add_box),
             ),
           ),*/
-        ],
-      ),
-    ))
+            ],
+          ),
+        ))
         //)
         );
   }

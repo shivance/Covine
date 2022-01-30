@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covine/constants.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,8 @@ import 'package:page_transition/page_transition.dart';
 import 'package:covine/screen1.dart';
 import 'package:covine/screen2.dart';
 import 'package:covine/screen3.dart';
-
-import 'package:covine/home.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:covine/about.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class NearbyInterface extends StatefulWidget {
@@ -181,19 +182,20 @@ class _NearbyInterfaceState extends State<NearbyInterface> {
     }*/
 
     return Scaffold(
+      backgroundColor: primary,
       key: globalKey,
       drawer: new Drawer(
         child: new ListView(
           children: <Widget>[
             new UserAccountsDrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.green,
+                color: Colors.teal,
               ),
               accountName: new Text(
                 "${widget.email}",
                 style: new TextStyle(
                   fontSize: 14,
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -201,25 +203,12 @@ class _NearbyInterfaceState extends State<NearbyInterface> {
                 "UID : ${loggedInUser.uid}",
                 style: new TextStyle(
                   fontSize: 14,
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               currentAccountPicture:
                   CircleAvatar(backgroundImage: AssetImage("images/user.jpg")),
-              otherAccountsPictures: <Widget>[
-                Container(
-                  height: 80,
-                  width: 200,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    border: Border.all(
-                      color: Colors.white,
-                    ),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-              ],
             ),
             new ListTile(
                 leading: Icon(Icons.help),
@@ -227,7 +216,7 @@ class _NearbyInterfaceState extends State<NearbyInterface> {
                   "About",
                   style: new TextStyle(
                     fontSize: 15.5,
-                    color: Colors.blue,
+                    color: primary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -240,7 +229,7 @@ class _NearbyInterfaceState extends State<NearbyInterface> {
                     PageTransition(
                       type: PageTransitionType.fade,
                       duration: Duration(milliseconds: 400),
-                      child: Home(),
+                      child: About(),
                     ),
                   );
                   //  Navigator.of(context).push(createRoute());
@@ -252,7 +241,7 @@ class _NearbyInterfaceState extends State<NearbyInterface> {
                   "Export Logs",
                   style: new TextStyle(
                     fontSize: 15.5,
-                    color: Colors.black,
+                    color: primary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -282,30 +271,12 @@ class _NearbyInterfaceState extends State<NearbyInterface> {
                   ).show();
                 }),
             new ListTile(
-                leading: Icon(Icons.report),
-                title: new Text(
-                  "Report (Infected)",
-                  style: new TextStyle(
-                    fontSize: 15.5,
-                    color: Colors.deepOrange,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-
-                  final snackBar = SnackBar(
-                      content: Text(
-                          'Go to the middle bottom navigation tab, for reporting!'));
-                  globalKey.currentState.showSnackBar(snackBar);
-                }),
-            new ListTile(
                 leading: Icon(Icons.settings),
                 title: new Text(
                   "Settings",
                   style: new TextStyle(
                     fontSize: 15.5,
-                    color: Colors.purple,
+                    color: primary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -322,7 +293,7 @@ class _NearbyInterfaceState extends State<NearbyInterface> {
                   "Logout",
                   style: new TextStyle(
                     fontSize: 15.5,
-                    color: Colors.black,
+                    color: Colors.teal,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -352,7 +323,7 @@ class _NearbyInterfaceState extends State<NearbyInterface> {
           },
         ),
         centerTitle: true,
-        title: Text('Covine',
+        title: Text('C O V I N E',
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -363,7 +334,7 @@ class _NearbyInterfaceState extends State<NearbyInterface> {
       body: viewContainer[page],
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.teal[300],
         items: <Widget>[
           Icon(Icons.home, size: 23),
           Icon(Icons.message, size: 23),
