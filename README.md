@@ -53,7 +53,7 @@ Project Structure :
     │   ├── main.dart
     │   └── screens
     │       ├── about.dart
-    │       ├── botscreen.dart
+    │       ├── chatscreen.dart
     │       ├── login.dart
     │       ├── registration.dart
     │       ├── screen1.dart
