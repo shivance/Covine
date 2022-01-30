@@ -13,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:covine/screens/about.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:covine/screens/botscreen.dart';
+import 'package:covine/screens/chatscreen.dart';
 
 class NearbyInterface extends StatefulWidget {
   static const String id = 'nearby_interface';
@@ -43,7 +44,7 @@ class _NearbyInterfaceState extends State<NearbyInterface> {
     Screen1(),
     Screen2(),
     Screen3(),
-    Bot(),
+    ChatScreen(),
     //VideoContainerScreen(),
     //AlbumContainerScreen()
   ];
@@ -341,7 +342,7 @@ class _NearbyInterfaceState extends State<NearbyInterface> {
           Icon(Icons.home, size: 23),
           Icon(Icons.message, size: 23),
           Icon(Icons.supervised_user_circle, size: 23),
-          Icon(Icons.home,size: 23),
+          Icon(Icons.chat,size:23),
         ],
         onTap: (index) {
           setState(() {

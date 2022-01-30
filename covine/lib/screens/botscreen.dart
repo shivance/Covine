@@ -14,7 +14,7 @@ class _BotState extends State<Bot> {
   String res_string='';
   Future<void>postTest() async {
     
-    final uri = Uri.parse("http://192.168.131.106:8000/api/bot/");
+    final uri = Uri.parse("http://192.168.71.106:8000/api/bot/");
     
     final response = await http.post(
       uri,
