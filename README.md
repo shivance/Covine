@@ -6,7 +6,7 @@ Covine is an android app with 2 major features :
   ### AI based Chatbot for covid 19 assistance 
   ### Covid Alert System using Graph Colouring Algorithm
   
-![Drive Link](https://drive.google.com/file/d/1ouqnh4oJ7FswkcQJtGmglLXy1RaTr_NS/view?usp=sharing) is the Gdrive link for the demonstration of the application.
+https://drive.google.com/file/d/1ouqnh4oJ7FswkcQJtGmglLXy1RaTr_NS/view?usp=sharing is the Gdrive link for the demonstration of the application.
 
 ## TechStack : 
 - Flutter & Firebase 
