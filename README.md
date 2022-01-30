@@ -10,7 +10,7 @@ Covine is an android app with 2 major features :
 - Flutter & Firebase 
 - Tensorflow for Natural Language Processing 
 - Django for backend and REST API for communication
-- 
+
 Project Structure :
 
 ```
@@ -72,3 +72,16 @@ Project Structure :
     ...which is then displayed in the mobile
 
 ### App Info :
+This app uses graph theory to build connection (edges) with persons(node) you came in close vicinity to. Incase of covid infection , alert is send to all immediate nodes(people) in the graph .
+
+  # Feature #1 : Contact Tracing 
+    - Uses BlueTooth Beacon to trace nearby people (offline mode)
+    - Displays all contact traces with time of contact , no of times contacted & location 
+    
+  # Feature #2 : Report Covid & Alert Contacts 
+    - An infected person declares Covid19 positive in the report portal
+    - All people who were in contact(share an edge with this node) are alerted as "Potential Threat"
+    
+  # Feature #3 : Crowd Map 
+    - Maps people onto location and displays the headcount at the location
+    -Gives insight into crowd intensity
