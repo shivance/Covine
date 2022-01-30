@@ -14,6 +14,16 @@ Project Structure :
            |_______> backend (django backend for serving the model)
             
            |_______> covine (android app client for model + Covid Alert interface)
+            android
+build
+fonts
+images
+ios
+lib
+pubspec.lock
+pubspec.yaml
+README.md
+test
             
 
 ### Chatbot Info :
