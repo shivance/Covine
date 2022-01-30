@@ -44,6 +44,7 @@ dependencies:
   flutter_map: any # or the latest version on Pub
   google_maps_flutter_heatmap: ^0.1.1+2
   persistent_bottom_nav_bar:
+  http:
   
 dev_dependencies:
   flutter_test:

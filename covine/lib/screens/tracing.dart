@@ -6,12 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:nearby_connections/nearby_connections.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:covine/screen1.dart';
-import 'package:covine/screen2.dart';
-import 'package:covine/screen3.dart';
+import 'package:covine/screens/screen1.dart';
+import 'package:covine/screens/screen2.dart';
+import 'package:covine/screens/screen3.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:covine/about.dart';
+import 'package:covine/screens/about.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:covine/screens/botscreen.dart';
 
 class NearbyInterface extends StatefulWidget {
   static const String id = 'nearby_interface';
@@ -41,7 +42,8 @@ class _NearbyInterfaceState extends State<NearbyInterface> {
   final List<Widget> viewContainer = [
     Screen1(),
     Screen2(),
-    Screen3()
+    Screen3(),
+    Bot(),
     //VideoContainerScreen(),
     //AlbumContainerScreen()
   ];
@@ -339,6 +341,7 @@ class _NearbyInterfaceState extends State<NearbyInterface> {
           Icon(Icons.home, size: 23),
           Icon(Icons.message, size: 23),
           Icon(Icons.supervised_user_circle, size: 23),
+          Icon(Icons.home,size: 23),
         ],
         onTap: (index) {
           setState(() {

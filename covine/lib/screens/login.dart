@@ -1,7 +1,7 @@
 import 'package:page_transition/page_transition.dart';
 import 'package:covine/components/rounded_button.dart';
 import 'package:covine/constants.dart';
-import 'package:covine/tracing.dart';
+import 'package:covine/screens/tracing.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
