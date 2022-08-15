@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from .models import Qna
 from .serializers import QnaSerializer
 from .nlp import answer
+
 
 # Create your views here.
 
@@ -15,9 +16,19 @@ from .models import Qna
 
 
 class QnaViewSet(viewsets.ModelViewSet):
-    queryset = Qna.objects.all()
-    serializer_class = QnaSerializer
+    '''
+    Viewset for listing and retrieve the questions asked by user
+    '''
+    def list(self, request):
+        queryset = Qna.objects.all()
+        serializer = QnaSerializer(queryset, many=True)
+        return Response(serializer.data)
 
+    def retrieve(self, request, pk=None):
+        queryset = Qna.objects.all()
+        que = get_object_or_404(queryset, pk=pk)
+        serializer = QnaSerializer(user)
+        return Response(serializer.data)
 
 '''
 run model in backend 
